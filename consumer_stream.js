@@ -10,14 +10,27 @@ const consumerOptions = {
     groupId: 'ExampleTestGroup',
     sessionTimeout: 15000,
     protocol: ['roundrobin'],
-    asyncPush: false,
-    id: 'consumer1',
-    fromOffset: 'latest'
+    // asyncPush: false,
+    // id: 'consumer1',
+    // fromOffset: 'latest'
 };
 // 需要使用 client.js 创建 ExampleTopic,
 // 需要使用 client.js 创建 RebalanceTopic,
 
-const consumerGroup = new ConsumerGroupStream(consumerOptions, 'ExampleTopic');
+// const consumerGroup = new ConsumerGroupStream(consumerOptions, 'ExampleTopic');
+
+// const messageTransform = new Transform({
+//     objectMode: true,
+//     decodeStrings: true,
+//     transform(message, encoding, callback) {
+//         console.log(`Received message ${message.value} transforming input`);
+//         callback(null, {
+//             topic: 'RebalanceTopic',
+//             messages: `You have been (${message.value}) made an example of`
+//         });
+//     }
+// });
+const consumerGroup = new ConsumerGroupStream(consumerOptions, 'kStreamTest_in_base');
 
 const messageTransform = new Transform({
     objectMode: true,
@@ -25,7 +38,7 @@ const messageTransform = new Transform({
     transform(message, encoding, callback) {
         console.log(`Received message ${message.value} transforming input`);
         callback(null, {
-            topic: 'RebalanceTopic',
+            topic: 'kStreamTest_out_base',
             messages: `You have been (${message.value}) made an example of`
         });
     }

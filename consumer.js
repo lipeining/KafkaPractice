@@ -4,7 +4,8 @@ const client = new kafka.KafkaClient();
 const consumer = new Consumer(
     client,
     [
-        { topic: 'topic1', partition: 0 }, { topic: 'topic2', partition: 0 }
+        { topic: 'topic1', partition: 0 }, { topic: 'topic2', partition: 0 },
+        { topic: 'kStreamTest_in_base', partition: 0 }
     ], {
         groupId: 'topic-group',
         autoCommit: true
